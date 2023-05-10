@@ -9,27 +9,28 @@ import { Todo } from '../../Models/Todo';
 
 export class TodosComponent {
   todos: Todo[]; // This is an array of Todo objects
+
+
   constructor() {
-    this.todos = [
-      {
-        sno: 1,
-        title: "This is title 1",
-        desc: "This is description 1",
-        active: true
-      },
-      {
-        sno: 2,
-        title: "This is title 2",
-        desc: "This is description 2",
-        active: true
-      }
-    ]
+    if (localStorage.getItem("todos") === null) {
+      this.todos = [];
+    } else {
+      const todosString = localStorage.getItem("todos");
+      this.todos = todosString ? JSON.parse(todosString) : [];
+    }
   }
 
-  deleteTodo(todo: Todo){
+
+  deleteTodo(todo: Todo) {
     console.log("Delete this todo", todo);
     const index = this.todos.indexOf(todo);
     this.todos.splice(index, 1);
+    localStorage.setItem("todos", JSON.stringify(this.todos));
   }
 
+  addTodo(todo: Todo) {
+    console.log(todo)
+    this.todos.push(todo);
+    localStorage.setItem("todos", JSON.stringify(this.todos));
+  }
 }
