@@ -1,0 +1,9 @@
+<ul *ngFor="let todo of todos">
+    <div class="card" style="width: 18rem;">
+        <div class="card-body">
+            <h5 class="card-title">{{todo.title}}</h5>
+            <p class="card-text">{{todo.desc}}</p>
+            <a class="card-link">{{todo.active==true?"Task Not Done":"Task Done"}}</a>
+        </div>
+    </div>
+</ul>
